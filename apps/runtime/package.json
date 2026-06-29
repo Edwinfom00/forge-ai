@@ -1,0 +1,22 @@
+{
+  "name": "@forge/runtime",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@forge/fir": "workspace:*",
+    "@forge/shared": "workspace:*",
+    "@forge/workflow": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.9.3",
+    "typescript": "^5.4.5"
+  }
+}

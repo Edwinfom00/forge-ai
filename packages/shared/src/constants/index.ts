@@ -1,0 +1,23 @@
+export const MAX_TEAMS_PER_ORGANIZATION = 12;
+export const MAX_AGENTS_PER_TEAM = 10;
+export const MAX_WORKFLOWS_PER_PROJECT = 50;
+export const MAX_STEPS_PER_WORKFLOW = 100;
+
+export const ORGANIZATION_NAME_MIN_LENGTH = 3;
+export const ORGANIZATION_NAME_MAX_LENGTH = 80;
+export const ORGANIZATION_DESCRIPTION_MAX_LENGTH = 500;
+
+export const TEAM_NAME_MIN_LENGTH = 2;
+export const TEAM_NAME_MAX_LENGTH = 60;
+
+export const AGENT_NAME_MIN_LENGTH = 2;
+export const AGENT_NAME_MAX_LENGTH = 60;
+export const AGENT_SYSTEM_PROMPT_MAX_LENGTH = 8000;
+
+export const PROJECT_NAME_MIN_LENGTH = 3;
+export const PROJECT_NAME_MAX_LENGTH = 100;
+
+export const DEFAULT_PAGE_SIZE = 20;
+export const MAX_PAGE_SIZE = 100;
+
+export const FIR_SCHEMA_VERSION = '1.0.0';

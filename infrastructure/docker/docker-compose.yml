@@ -1,0 +1,67 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: forge-postgres
+    environment:
+      POSTGRES_DB: forgeai
+      POSTGRES_USER: forge
+      POSTGRES_PASSWORD: forge_secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U forge -d forgeai"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: forge-redis
+    command: redis-server --save 60 1 --loglevel warning
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ai-engine:
+    build:
+      context: ../../apps/ai-engine
+      dockerfile: ../../infrastructure/docker/Dockerfile.ai-engine
+    container_name: forge-ai-engine
+    environment:
+      DATABASE_URL: postgresql://forge:forge_secret@postgres:5432/forgeai
+      REDIS_URL: redis://redis:6379
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  studio:
+    build:
+      context: ../../
+      dockerfile: infrastructure/docker/Dockerfile.studio
+    container_name: forge-studio
+    environment:
+      DATABASE_URL: postgresql://forge:forge_secret@postgres:5432/forgeai
+      REDIS_URL: redis://redis:6379
+      AI_ENGINE_URL: http://ai-engine:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - ai-engine
+
+volumes:
+  postgres_data:
+  redis_data:
