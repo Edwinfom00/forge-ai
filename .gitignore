@@ -65,6 +65,9 @@ coverage
 # Docker
 .docker
 
+# Claude Code
+.claude/
+
 # Misc
 .cache
 tmp
