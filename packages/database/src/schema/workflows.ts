@@ -1,4 +1,4 @@
-import { pgTable, uuid, text, timestamp, jsonb } from 'drizzle-orm/pg-core';
+import { pgTable, uuid, text, timestamp, jsonb, boolean } from 'drizzle-orm/pg-core';
 import { projects } from './projects.js';
 
 export const workflows = pgTable('workflows', {
@@ -21,7 +21,7 @@ export const workflowSteps = pgTable('workflow_steps', {
   toolIds: jsonb('tool_ids').default([]),
   dependsOn: jsonb('depends_on').default([]),
   preconditions: jsonb('preconditions').default([]),
-  parallel: text('parallel').notNull().default('false'),
+  parallel: boolean('parallel').notNull().default(false),
   retryPolicy: jsonb('retry_policy'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
