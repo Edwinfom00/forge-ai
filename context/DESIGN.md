@@ -10,6 +10,23 @@ Every screen must pass the AI slop test: if someone can look at it and immediate
 
 ---
 
+## Context Files
+
+All project requirement files live in `context/`:
+
+| File | Purpose |
+|---|---|
+| [context/PRODUCT.md](PRODUCT.md) | Product context — required by `impeccable` skill |
+| [context/DESIGN.md](DESIGN.md) | This file — 2026 design system and standards |
+| [context/PROMPT.md](PROMPT.md) | Master prompt library — 55 prompts for the full project lifecycle |
+
+`AGENT.md` at root is the architectural spec — every prompt reads it first.
+
+> **impeccable note:** `PRODUCT.md` is at `context/PRODUCT.md`. Run:
+> `node .agents/skills/impeccable/scripts/context.mjs --target context/PRODUCT.md`
+
+---
+
 ## Active Skills
 
 These skills are installed at `.agents/skills/` and must be applied to all UI work:
