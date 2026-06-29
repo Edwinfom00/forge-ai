@@ -5,3 +5,5 @@ export * from './teams.js';
 export * from './agents.js';
 export * from './workflows.js';
 export * from './fir-records.js';
+export * from './prompts.js';
+export * from './memories.js';
